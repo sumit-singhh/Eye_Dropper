@@ -3,12 +3,12 @@ import numpy as np
 cmyk_scale = 100
 r = g = b = x_pos = y_pos = 0
 
-path = r'Test.jpeg'
+path = r'Test.jpeg'     #change image form here
 user_img = cv2.imread(path)
 
-default_img = np.zeros((200, 400, 3), np.uint8)
+default_img = np.zeros((200, 400, 3), np.uint8)     #values are displayed in this window
 
-def rgb_to_hex(rgb):
+def rgb_to_hex(rgb):    
     hex_val ='%02x%02x%02x' % rgb
     return hex_val
 
@@ -23,16 +23,16 @@ def rgb_to_cmyk(r,g,b):
         return round(c*cmyk_scale,0),round(m*cmyk_scale,0),round(y*cmyk_scale,0),round(k*cmyk_scale,0)
 
 def draw_function(event, x, y, null_0, null_1):
-    if event == cv2.EVENT_MOUSEMOVE:
+    if event == cv2.EVENT_MOUSEMOVE:    #takes the movement of mouse/cursor as input
         global b, g, r, x_pos, y_pos
         x_pos = x
         y_pos = y
         b, g, r = user_img[y, x]
     
-cv2.namedWindow('EYE DROPPER')  
-cv2.setMouseCallback('EYE DROPPER', draw_function)
+cv2.namedWindow('EYE DROPPER')  #merges all windows
+cv2.setMouseCallback('EYE DROPPER', draw_function)  
 
-while True:
+while True: #infinite loop till image is displayed
     cv2.imshow('EYE DROPPER', user_img)
 
     if r>150 and g>150 and b>150:
